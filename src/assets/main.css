@@ -1,0 +1,200 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/plus-jakarta-sans';
+
+/* Design tokens follow the NextCart look (indigo + magenta/amber gradient, navy ink, big rounded shapes),
+   with Monday-style friendly colour accents on the feature tiles. */
+:root {
+  --primary: #635bff;
+  --primary-dark: #4338ca;
+  --primary-soft: #eeedff;
+  --magenta: #f0206b;
+  --amber: #ffb81c;
+  --cyan: #22d3ee;
+  --green: #1aa657;
+  --navy: #17124c;
+  --ink-950: #0a0822;
+  --ink-900: #110d33;
+  --ink-800: #1d1850;
+
+  --bg: #f8fafc;
+  --surface: #fff;
+  --text: #111827;
+  --text-muted: #5b6577;
+  --border: #e2e8f0;
+
+  --gradient-brand: linear-gradient(100deg, #f0206b 0%, #ff6a3d 45%, #ffb81c 100%);
+  --gradient-primary: linear-gradient(120deg, #635bff 0%, #8b5cf6 55%, #f0206b 120%);
+
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --shadow: 0 1px 2px #1118270a, 0 8px 24px -8px #17124c1f;
+  --shadow-lg: 0 2px 4px #1118270a, 0 24px 64px -20px #17124c47;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --nav-h: 72px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --max: 1200px;
+
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Plus Jakarta Sans Variable', 'Inter Variable', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 12px);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(64px, 9vw, 112px);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.section-title {
+  margin-top: 12px;
+  font-size: clamp(1.875rem, 4vw, 3rem);
+  font-weight: 800;
+}
+
+/* Buttons: pills, like NextCart */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out),
+    background-color 0.25s var(--ease-out);
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn--primary {
+  color: #fff;
+  background: var(--primary);
+  box-shadow: 0 10px 24px -10px #635bff99;
+}
+.btn--primary:hover {
+  background: var(--primary-dark);
+}
+.btn--ghost {
+  color: var(--navy);
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--border);
+}
+.btn--ghost:hover {
+  box-shadow: inset 0 0 0 1.5px var(--primary);
+  color: var(--primary);
+}
+.btn--sm {
+  height: 42px;
+  padding: 0 20px;
+  font-size: 0.875rem;
+}
+.btn--light {
+  color: var(--navy);
+  background: #fff;
+}
+
+.text-gradient {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .btn {
+    transition: none;
+  }
+}
