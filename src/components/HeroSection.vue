@@ -7,8 +7,8 @@ const root = ref(null)
 
 useMotion(root, () => {
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-  tl.from('.hero__eyebrow', { y: 20, opacity: 0, duration: 0.6 })
-    .from('.hero__title .w', { yPercent: 115, duration: 0.9, stagger: 0.12 }, '-=0.3')
+  tl.from('.hero__eyebrow', { y: 16, opacity: 0, duration: 0.6 })
+    .from('.hero__title .w', { opacity: 0, filter: 'blur(10px)', yPercent: 35, rotation: 2, duration: 0.9, stagger: 0.14 }, '-=0.3')
     .from('.hero__tagline', { y: 24, opacity: 0, duration: 0.7 }, '-=0.45')
     .from('.hero__text', { y: 24, opacity: 0, duration: 0.7 }, '-=0.5')
     .from('.hero__actions .btn', { y: 24, opacity: 0, duration: 0.6, stagger: 0.1 }, '-=0.45')
@@ -20,19 +20,7 @@ useMotion(root, () => {
   gsap.to('.hero__frame', { y: -50, ease: 'none', scrollTrigger: scrub })
   gsap.to('.chip--a', { y: -90, ease: 'none', scrollTrigger: scrub })
   gsap.to('.chip--b', { y: -30, ease: 'none', scrollTrigger: scrub })
-  gsap.to('.hero__copy', { y: 40, opacity: 0.2, ease: 'none', scrollTrigger: scrub })
 
-  // The bars of the dashboard "frame" tilt towards the pointer
-  const frame = root.value.querySelector('.hero__frame')
-  const rx = gsap.quickTo(frame, 'rotationX', { duration: 0.6, ease: 'power3.out' })
-  const ry = gsap.quickTo(frame, 'rotationY', { duration: 0.6, ease: 'power3.out' })
-  const move = (e) => {
-    const r = root.value.getBoundingClientRect()
-    ry(((e.clientX - r.left) / r.width - 0.5) * -8)
-    rx(((e.clientY - r.top) / r.height - 0.5) * 6)
-  }
-  root.value.addEventListener('pointermove', move)
-  return () => root.value?.removeEventListener('pointermove', move)
 })
 </script>
 
@@ -40,7 +28,7 @@ useMotion(root, () => {
   <section id="home" ref="root" class="hero">
     <div class="container hero__inner">
       <div class="hero__copy">
-        <p class="eyebrow hero__eyebrow">{{ hero.eyebrow }}</p>
+        <p class="eyebrow hero__eyebrow"><i class="pulse-dot" aria-hidden="true" />{{ hero.eyebrow }}</p>
         <h1 class="hero__title">
           <span class="line"><span class="w">Manage</span></span>
           <span class="line"><span class="w text-gradient">Everything</span></span>
@@ -69,7 +57,7 @@ useMotion(root, () => {
 .hero {
   position: relative;
   padding-top: calc(var(--nav-h) + clamp(32px, 6vw, 72px));
-  padding-bottom: clamp(56px, 8vw, 104px);
+  padding-bottom: var(--section-y);
 }
 .hero__inner {
   position: relative;
@@ -79,13 +67,16 @@ useMotion(root, () => {
   gap: clamp(32px, 5vw, 72px);
 }
 .hero__eyebrow {
-  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
   border-radius: 999px;
   background: var(--primary-soft);
 }
 .hero__title {
   margin-top: 20px;
-  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-size: var(--fs-hero);
   font-weight: 800;
   letter-spacing: -0.035em;
 }
@@ -101,14 +92,14 @@ useMotion(root, () => {
 .hero__tagline {
   margin-top: 20px;
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.4vw, 1.625rem);
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
   font-weight: 700;
   color: var(--navy);
 }
 .hero__text {
   margin-top: 10px;
   max-width: 34ch;
-  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  font-size: var(--fs-lead);
   color: var(--text-muted);
 }
 .hero__actions {

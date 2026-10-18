@@ -15,22 +15,11 @@ const ICONS = [
 
 const root = ref(null)
 
-useMotion(root, ({ hover }) => {
-  gsap.from('.head > *', {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.12,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: '.head', start: 'top 85%', once: true },
-  })
-
+useMotion(root, () => {
   // Tiles fly in from alternating directions and settle
   gsap.from('.tile', {
-    y: 70,
-    x: (i) => (i % 2 ? 40 : -40),
-    rotation: (i) => (i % 2 ? 3 : -3),
-    scale: 0.92,
+    y: 48,
+    scale: 0.96,
     opacity: 0,
     duration: 0.9,
     stagger: 0.12,
@@ -45,28 +34,6 @@ useMotion(root, ({ hover }) => {
     scrollTrigger: { trigger: '.bento', start: 'top bottom', end: 'bottom top', scrub: 0.8 },
   })
 
-  if (!hover) return
-  // Tiles tilt toward the pointer
-  const cleanups = gsap.utils.toArray('.tile', root.value).map((tile) => {
-    const rx = gsap.quickTo(tile, 'rotationX', { duration: 0.5, ease: 'power3.out' })
-    const ry = gsap.quickTo(tile, 'rotationY', { duration: 0.5, ease: 'power3.out' })
-    const move = (e) => {
-      const r = tile.getBoundingClientRect()
-      ry(((e.clientX - r.left) / r.width - 0.5) * 8)
-      rx(((e.clientY - r.top) / r.height - 0.5) * -8)
-    }
-    const leave = () => {
-      rx(0)
-      ry(0)
-    }
-    tile.addEventListener('pointermove', move)
-    tile.addEventListener('pointerleave', leave)
-    return () => {
-      tile.removeEventListener('pointermove', move)
-      tile.removeEventListener('pointerleave', leave)
-    }
-  })
-  return () => cleanups.forEach((c) => c())
 })
 </script>
 
@@ -74,8 +41,8 @@ useMotion(root, ({ hover }) => {
   <section id="platform" ref="root" class="section">
     <div class="container">
       <div class="head">
-        <p class="eyebrow">{{ platform.eyebrow }}</p>
-        <h2 class="section-title">{{ platform.title }}</h2>
+        <p v-fade class="eyebrow">{{ platform.eyebrow }}</p>
+        <h2 v-words class="section-title">{{ platform.title }}</h2>
       </div>
 
       <div class="bento">
@@ -133,7 +100,7 @@ useMotion(root, ({ hover }) => {
 }
 .tile--lead .tile__title {
   max-width: 14ch;
-  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  font-size: var(--fs-h2);
   font-weight: 800;
   color: #fff;
 }

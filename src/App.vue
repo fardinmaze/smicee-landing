@@ -1,5 +1,7 @@
 <script setup>
 import AnimatedBackground from './components/AnimatedBackground.vue'
+import ScrollProgress from './components/ScrollProgress.vue'
+import VideoSection from './components/VideoSection.vue'
 import SiteHeader from './components/SiteHeader.vue'
 import HeroSection from './components/HeroSection.vue'
 import PortfolioStrip from './components/PortfolioStrip.vue'
@@ -14,11 +16,13 @@ import SiteFooter from './components/SiteFooter.vue'
 </script>
 
 <template>
+  <ScrollProgress />
   <AnimatedBackground />
   <SiteHeader />
   <main>
     <HeroSection />
     <PortfolioStrip />
+    <VideoSection />
     <PlatformSection />
     <ModulesSection />
     <ShowcaseSection />

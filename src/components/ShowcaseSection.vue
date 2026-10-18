@@ -68,13 +68,13 @@ useMotion(root, () => {
 }
 .row__title {
   margin-top: 12px;
-  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  font-size: var(--fs-h2);
   font-weight: 800;
 }
 .row__text {
   margin-top: 16px;
   max-width: 44ch;
-  font-size: 1.125rem;
+  font-size: var(--fs-lead);
   color: var(--text-muted);
 }
 .row__cta {

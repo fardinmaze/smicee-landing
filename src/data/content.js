@@ -155,3 +155,16 @@ export const footer = {
   social: ['Facebook', 'Instagram', 'Twitter'],
   copyright: 'SMICEE. All rights reserved.',
 }
+
+// Promo videos. PLACEHOLDER slots: nothing is playable until a `src` (a file in public/videos/, e.g. '/videos/promo.mp4')
+// or an `embed` (a YouTube / Vimeo embed URL) is set. `poster` is an optional cover image. The slots keep a fixed
+// 16:9 size, so adding a video never moves the rest of the page.
+export const videos = {
+  eyebrow: 'Videos',
+  title: 'See SMICEE in action',
+  featured: { title: 'SMICEE promo video', src: '', embed: '', poster: '' },
+  more: [
+    { title: 'Promo video 2', src: '', embed: '', poster: '' },
+    { title: 'Promo video 3', src: '', embed: '', poster: '' },
+  ],
+}

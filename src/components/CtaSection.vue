@@ -61,7 +61,7 @@ useMotion(root, () => {
 
 <style scoped>
 .cta {
-  padding-block: clamp(64px, 9vw, 112px) clamp(72px, 10vw, 128px);
+  padding-block: var(--section-y);
 }
 .cta__card {
   position: relative;
@@ -106,7 +106,7 @@ useMotion(root, () => {
 }
 .cta__title {
   max-width: 20ch;
-  font-size: clamp(2rem, 4.6vw, 3.5rem);
+  font-size: calc(var(--fs-h2) * 1.12);
   font-weight: 800;
 }
 .cta__text {

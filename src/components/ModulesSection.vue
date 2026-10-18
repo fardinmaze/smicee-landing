@@ -22,15 +22,6 @@ const track = ref(null)
 const bar = ref(null)
 
 useMotion(root, ({ desktop }) => {
-  gsap.from('.head > *', {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.12,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: '.head', start: 'top 85%', once: true },
-  })
-
   if (!desktop) {
     // Phones and tablets: a normal grid whose cards pop in one after another
     gsap.from('.card', {
@@ -99,8 +90,8 @@ useMotion(root, ({ desktop }) => {
   <section id="features" ref="root" class="modules">
     <div class="container modules__inner">
       <div class="head">
-        <p class="eyebrow">{{ modules.eyebrow }}</p>
-        <h2 class="section-title">{{ modules.title }}</h2>
+        <p v-fade class="eyebrow">{{ modules.eyebrow }}</p>
+        <h2 v-words class="section-title">{{ modules.title }}</h2>
       </div>
 
       <div class="view">
@@ -120,7 +111,7 @@ useMotion(root, ({ desktop }) => {
 
 <style scoped>
 .modules {
-  padding-block: clamp(64px, 9vw, 112px);
+  padding-block: var(--section-y);
   background: #fff;
   border-block: 1px solid var(--border);
 }

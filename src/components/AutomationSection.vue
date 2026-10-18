@@ -99,7 +99,7 @@ useMotion(root, () => {
 .band__title {
   margin-top: 8px;
   max-width: 24ch;
-  font-size: clamp(1.5rem, 3.2vw, 2.375rem);
+  font-size: var(--fs-h2);
   font-weight: 800;
   color: #fff;
 }

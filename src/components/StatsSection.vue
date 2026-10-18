@@ -10,15 +10,6 @@ const shown = ref(stats.items.map((s) => s.value))
 useMotion(root, () => {
   shown.value = stats.items.map(() => 0)
 
-  gsap.from('.head > *', {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.12,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: '.head', start: 'top 85%', once: true },
-  })
-
   const tl = gsap.timeline({ scrollTrigger: { trigger: '.grid', start: 'top 80%', once: true } })
   tl.from('.stat', { y: 60, opacity: 0, scale: 0.92, duration: 0.8, stagger: 0.12, ease: 'back.out(1.5)' })
   stats.items.forEach((s, i) => {
@@ -63,8 +54,8 @@ useMotion(root, () => {
     <div class="stats__glow" aria-hidden="true" />
     <div class="container stats__inner">
       <div class="head">
-        <p class="eyebrow stats__eyebrow">{{ stats.eyebrow }}</p>
-        <h2 class="section-title stats__title">{{ stats.title }}</h2>
+        <p v-fade class="eyebrow stats__eyebrow">{{ stats.eyebrow }}</p>
+        <h2 v-words class="section-title stats__title">{{ stats.title }}</h2>
       </div>
 
       <ul class="grid">
@@ -82,7 +73,7 @@ useMotion(root, () => {
 .stats {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(64px, 9vw, 112px);
+  padding-block: var(--section-y);
   background: linear-gradient(160deg, var(--ink-900) 0%, var(--navy) 100%);
 }
 .stats__glow {

@@ -5,24 +5,12 @@ import { gsap, useMotion } from '@/lib/motion.js'
 
 const root = ref(null)
 
-useMotion(root, ({ hover }) => {
-  gsap.from('.head > *', {
-    y: 30,
+useMotion(root, () => {
+  // Cards fade up one after another
+  gsap.from('.card', {
+    y: 48,
     opacity: 0,
     duration: 0.8,
-    stagger: 0.12,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: '.head', start: 'top 85%', once: true },
-  })
-
-  // Cards start fanned out like a hand of cards, then deal themselves into a row
-  gsap.from('.card', {
-    y: 90,
-    rotation: (i) => (i - 1) * 9,
-    xPercent: (i) => (1 - i) * 60,
-    scale: 0.9,
-    opacity: 0,
-    duration: 1,
     stagger: 0.14,
     ease: 'power3.out',
     scrollTrigger: { trigger: '.grid', start: 'top 82%', once: true },
@@ -42,30 +30,6 @@ useMotion(root, ({ hover }) => {
     )
   })
 
-  if (!hover) return
-  const cleanups = gsap.utils.toArray('.card', root.value).map((card) => {
-    const rx = gsap.quickTo(card, 'rotationX', { duration: 0.5, ease: 'power3.out' })
-    const ry = gsap.quickTo(card, 'rotationY', { duration: 0.5, ease: 'power3.out' })
-    const lift = gsap.quickTo(card, 'y', { duration: 0.5, ease: 'power3.out' })
-    const move = (e) => {
-      const r = card.getBoundingClientRect()
-      ry(((e.clientX - r.left) / r.width - 0.5) * 10)
-      rx(((e.clientY - r.top) / r.height - 0.5) * -10)
-      lift(-6)
-    }
-    const leave = () => {
-      rx(0)
-      ry(0)
-      lift(0)
-    }
-    card.addEventListener('pointermove', move)
-    card.addEventListener('pointerleave', leave)
-    return () => {
-      card.removeEventListener('pointermove', move)
-      card.removeEventListener('pointerleave', leave)
-    }
-  })
-  return () => cleanups.forEach((c) => c())
 })
 </script>
 
@@ -73,8 +37,8 @@ useMotion(root, ({ hover }) => {
   <section ref="root" class="section leads">
     <div class="container">
       <div class="head">
-        <p class="eyebrow">{{ leads.eyebrow }}</p>
-        <h2 class="section-title">{{ leads.title }}</h2>
+        <p v-fade class="eyebrow">{{ leads.eyebrow }}</p>
+        <h2 v-words class="section-title">{{ leads.title }}</h2>
       </div>
 
       <ul class="grid">
